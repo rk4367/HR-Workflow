@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 14% 96%;
+    --foreground: 224 71% 4%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 71% 4%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71% 4%;
+
+    --primary: 173 80% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 224 71% 4%;
+
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+
+    --accent: 220 14% 96%;
+    --accent-foreground: 224 71% 4%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 173 80% 40%;
+
+    --radius: 0.5rem;
+
+    /* Workflow node colors */
+    --node-start: 142 76% 36%;
+    --node-start-foreground: 0 0% 100%;
+    --node-task: 217 91% 60%;
+    --node-task-foreground: 0 0% 100%;
+    --node-approval: 38 92% 50%;
+    --node-approval-foreground: 0 0% 100%;
+    --node-automated: 262 83% 58%;
+    --node-automated-foreground: 0 0% 100%;
+    --node-end: 346 77% 50%;
+    --node-end-foreground: 0 0% 100%;
+
+    /* Canvas */
+    --canvas-bg: 220 14% 96%;
+    --canvas-dots: 220 13% 85%;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 224 71% 4%;
+    --sidebar-primary: 173 80% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 224 71% 4%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 173 80% 40%;
+
+    /* Panel */
+    --panel-bg: 0 0% 100%;
+    --panel-border: 220 13% 91%;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(220 13% 10% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(220 13% 10% / 0.1), 0 2px 4px -2px hsl(220 13% 10% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(220 13% 10% / 0.1), 0 4px 6px -4px hsl(220 13% 10% / 0.1);
+  }
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+
+    --popover: 224 71% 4%;
+    --popover-foreground: 213 31% 91%;
+
+    --primary: 173 80% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 215 28% 17%;
+    --secondary-foreground: 213 31% 91%;
+
+    --muted: 215 28% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 215 28% 17%;
+    --accent-foreground: 213 31% 91%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+    --ring: 173 80% 40%;
+
+    --canvas-bg: 224 71% 4%;
+    --canvas-dots: 215 28% 17%;
+
+    --sidebar-background: 224 71% 4%;
+    --sidebar-foreground: 213 31% 91%;
+    --sidebar-border: 215 28% 17%;
+
+    --panel-bg: 224 71% 4%;
+    --panel-border: 215 28% 17%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* React Flow customizations */
+.react-flow__node {
+  @apply !border-0;
+}
+
+.react-flow__handle {
+  @apply !w-3 !h-3 !border-2 !border-white !bg-muted-foreground transition-all;
+  box-shadow: 0 0 0 4px hsl(var(--background));
+}
+
+.react-flow__handle:hover {
+  @apply !bg-primary scale-125;
+  box-shadow: 0 0 0 4px hsl(var(--primary) / 0.25);
+}
+
+.react-flow__handle::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+}
+
+.react-flow__edge-path {
+  stroke-width: 2;
+}
+
+.react-flow__background {
+  @apply bg-background;
+}
+
+/* Node animations */
+@keyframes node-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px hsl(var(--primary) / 0);
+  }
+}
+
+.workflow-node {
+  @apply rounded-lg border-2 bg-card shadow-md transition-all duration-200;
+}
+
+.workflow-node:hover {
+  @apply shadow-lg scale-[1.02];
+}
+
+.workflow-node.selected {
+  animation: node-pulse 2s infinite;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-border rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}
